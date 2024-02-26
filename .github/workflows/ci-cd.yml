@@ -19,10 +19,10 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build the Docker image
-      run: docker build ./backend --file backend/Dockerfile --tag myusername/myapp:${{ github.sha }}
+      run: docker build ./backend --file backend/Dockerfile --tag sullivlu21/flask_app:${{ github.sha }}
 
     - name: Push the Docker image to Docker Hub
-      run: docker push myusername/myapp:${{ github.sha }}
+      run: docker push sullivlu21/flask_app:${{ github.sha }}
 
   test:
     needs: build
@@ -30,7 +30,7 @@ jobs:
 
     steps:
     - name: Pull the Docker image from Docker Hub
-      run: docker pull myusername/myapp:${{ github.sha }}
+      run: docker pull sullivlu21/flask_app:${{ github.sha }}
 
     - name: Run tests
-      run: docker run myusername/myapp:${{ github.sha }} /bin/sh -c "pytest"
+      run: docker run sullivlu21/flask_app:${{ github.sha }} /bin/sh -c "pytest"
